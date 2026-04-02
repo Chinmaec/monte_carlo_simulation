@@ -36,9 +36,17 @@ $$
 | European Call (Black-Scholes) | 10.45 | - | - | - | - |
 | Asian Call (MC, arithmetic, antithetic) | 5.82 | 0.03 | (5.76, 5.87) | 0.59 | 0.03 |
 
+## Requirements 
+numpy==2.3.3
+scipy==1.16.2
+pandas==2.3.2
+matplotlib==3.10.6
+
 ## Usage
+```powershell
 cd monte_carlo_simulation
 pip install -r requirements.txt
 python test.py
+```
 
 
