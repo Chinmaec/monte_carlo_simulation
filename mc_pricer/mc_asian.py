@@ -1,4 +1,4 @@
-# # Asian Monte Carlo (plain and antithetic methods)
+# # Asian Monte Carlo (plain, antithetic and control variate methods)
 import numpy as np
 from scipy.stats import norm
 from mc_pricer.core import payoff_vanilla, mc_stats

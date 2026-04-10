@@ -1,26 +1,54 @@
 # Monte Carlo Option Pricer
 
+<p align="center">
+  <img src="./images/mc_european_asian_dark.png" alt="European and Asian Monte Carlo" width="900"/>
+</p>
+
 ## Overview
 Monte Carlo pricing engine for derivative pricing under risk-neutral Geometric Brownian Motion, with integrated variance reduction and Greeks estimation.
 
 Supports European and Asian options, quantifies estimator uncertainty, and validates European pricing against Black–Scholes.
 
 ## Methodology
-- Simulate under $\mathbb{Q}$:
+- Simulate under risk-neutral GBM paths under $\mathbb{Q}$:
 
 $$
 S_{t+\Delta t}=S_t\exp\left((r-\frac{1}{2}\sigma^2)\Delta t+\sigma\sqrt{\Delta t}\,Z\right),\quad Z\sim\mathcal{N}(0,1)
 $$
-- Price estimator:
+- Monte Carlo Price estimator:
 
 $$
 \hat V_0=e^{-rT}\frac{1}{N}\sum_{i=1}^N \mathrm{Payoff}\!\left(S^{(i)}\right)
 $$
-- Variance reduction via antithetic variates using shared path construction $(Z,-Z)$
-- Inference metrics: Monte Carlo standard error and two-sided 95% confidence interval.
-- Greeks (Delta, Gamma) estimated via central finite differences with common random numbers (CRN)
-- Benchmarks European options against closed-form Black–Scholes for validation.
-- Empirical convergence consistent with Monte Carlo rate ($O(N^{-1/2})$)
+
+
+- Supported estimators:
+  - `plain`: standard Monte Carlo sampling
+  - `antithetic`: variance reduction using paired shocks $(Z,-Z)$
+  - `control_variate` (Asian arithmetic call/put): uses geometric-average Asian payoff as control
+
+- Control variate estimator (Asian arithmetic):
+  - Let
+    - $X = e^{-rT}\max(A_{\text{arith}}-K,0)$ (or put payoff),
+    - $Y = e^{-rT}\max(G_{\text{geom}}-K,0)$ (or put payoff),
+    - $\theta=\mathbb{E}[Y]$ from the closed-form discrete geometric Asian price.
+  - Then:
+$$
+\hat V_{\text{CV}}=\bar X-\beta(\bar Y-\theta),\qquad
+\beta=\frac{\operatorname{Cov}(X,Y)}{\operatorname{Var}(Y)}
+$$
+
+- Inference diagnostics for each estimator:
+  - Monte Carlo standard error (SE)
+  - Two-sided 95% confidence interval (CI95)
+
+- Greeks:
+  - Delta and Gamma via central finite differences
+  - Common random numbers (CRN) across bumped evaluations for variance reduction
+
+- Validation:
+  - European MC prices benchmarked against Black-Scholes closed form
+  - Empirical convergence consistent with $O(N^{-1/2})$
 
 ## Features
 - European and Asian option pricing (arithmetic & geometric averaging)
@@ -64,9 +92,5 @@ Includes:
 - Plain vs antithetic vs control variate variance comparison
 - Greeks estimation (Delta, Gamma)
 
-## Visualization 
 
-<p align="center">
-  <img src="./images/mc_european_asian_dark.png" alt="European and Asian Monte Carlo" width="900"/>
-</p>
 
