@@ -62,7 +62,7 @@ matplotlib==3.10.6
 ```
 ## GitHub Installation
 ```bash
-pip install "https://github.com/Chinmaec/monte_carlo_option_pricer.git"
+pip install "git+https://github.com/Chinmaec/monte_carlo_option_pricer.git"
 ```
 
 ## Usage
