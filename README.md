@@ -27,17 +27,6 @@ $$
   - `antithetic`: variance reduction using paired shocks $(Z,-Z)$
   - `control_variate` (Asian arithmetic call/put): uses geometric-average Asian payoff as control
 
-- Control variate estimator (Asian arithmetic):
-  - Let
-    - $X = e^{-rT}\max(A_{\text{arith}}-K,0)$ (or put payoff),
-    - $Y = e^{-rT}\max(G_{\text{geom}}-K,0)$ (or put payoff),
-    - $\theta=\mathbb{E}[Y]$ from the closed-form discrete geometric Asian price.
-  - Then:
-$$
-\hat V_{\text{CV}}=\bar X-\beta(\bar Y-\theta),\qquad
-\beta=\frac{\operatorname{Cov}(X,Y)}{\operatorname{Var}(Y)}
-$$
-
 - Inference diagnostics for each estimator:
   - Monte Carlo standard error (SE)
   - Two-sided 95% confidence interval (CI95)
