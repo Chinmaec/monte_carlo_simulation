@@ -43,10 +43,10 @@ scipy==1.16.2
 pandas==2.3.2
 matplotlib==3.10.6
 ```
-## Installation
-### From GitHub
+## GitHub Installation
 ```bash
 pip install "https://github.com/Chinmaec/monte_carlo_option_pricer.git"
+```
 
 ## Usage
 ```powershell
@@ -61,7 +61,7 @@ Detailed convergence analysis, variance reduction comparisons, and pricing diagn
 
 Includes:
 - Convergence behaviour (error vs simulations)
-- Plain vs antithetic (European) and plain vs antithetic vs control variate (Asian) variance comparison
+- Plain vs antithetic vs control variate variance comparison
 - Greeks estimation (Delta, Gamma)
 
 ## Visualization 
